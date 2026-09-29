@@ -1,11 +1,35 @@
+import React, { useState } from "react";
 import NavBar from "./navbar";
 import LeftSide from "./leftSide";
 import CardItem from "./cardItems";
 import { projectsData } from "./projectsData";
 import { Link } from "@tanstack/react-router";
-
+import ConfirmContentMessage from "./comfirmContentMessage";
 
 function Dashboard() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate API call to send email
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setShowConfirm(true);
+      
+      // Hide confirmation message after 3 seconds
+      setTimeout(() => {
+        setShowConfirm(false);
+      }, 3000);
+      
+      // Reset form
+      const target = e.target as HTMLFormElement;
+      target.reset();
+    }, 1500);
+  };
+
   return (
     <div className="flex relative h-screen bg-[#020617] text-white overflow-hidden">
       <LeftSide />
@@ -30,19 +54,18 @@ function Dashboard() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                   View Projects
                 </Link>
-                <Link to="/resume" className="px-6 py-3 bg-transparent border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white rounded-full font-medium transition-all flex items-center gap-2">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                  Download Resume
+                <Link to="/agreement" className="px-6 py-3 bg-transparent border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white rounded-full font-medium transition-all flex items-center gap-2">
+                agreement form                     
                 </Link>
               </div>
 
               {/* Tech Icons Row */}
-              <div className="flex items-center gap-4 bg-[#0a0f1c] border border-blue-900/30 p-3 rounded-2xl w-fit">
+              <div className="flex items-center gap-6 bg-[#0a0f1c] border border-blue-900/30 p-4 rounded-3xl w-fit">
                 {/* Icons placeholders for Python, FastAPI, C++, React, Node, Docker, Postgres, AWS, Linux */}
                 {['Python', 'FastAPI', 'C++', 'React', 'Node.js', 'Docker', 'PostgreSQL', 'AWS', 'Linux'].map((tech) => (
-                  <div key={tech} className="w-10 h-10 rounded-full bg-[#111827] flex items-center justify-center border border-gray-800 hover:border-blue-500/50 transition-colors tooltip relative group cursor-help">
-                    <span className="text-[10px] font-semibold text-blue-400">{tech.substring(0,2)}</span>
-                    <div className="absolute -bottom-8 bg-gray-900 text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-gray-700 pointer-events-none z-10">{tech}</div>
+                  <div key={tech} className="w-14 h-14 rounded-full bg-[#111827] flex items-center justify-center border border-gray-800 hover:border-blue-500/50 transition-colors tooltip relative group cursor-help shadow-sm">
+                    <span className="text-xs font-semibold text-blue-400 tracking-wider">{tech.substring(0,2)}</span>
+                    <div className="absolute -bottom-8 bg-gray-900 text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-gray-700 pointer-events-none z-10 shadow-lg">{tech}</div>
                   </div>
                 ))}
               </div>
@@ -144,10 +167,10 @@ function Dashboard() {
                    <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                    Featured Projects
                  </h3>
-                 <a href="#" className="text-xs font-medium text-blue-400 hover:text-blue-300">View All Projects →</a>
+                 <a href="#" className="text-xs font-medium text-blue-400 hover:text-blue-300 flex items-center gap-1">View All Projects <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
                </div>
                
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                  {projectsData.map(project => (
                    <CardItem key={project.id} {...project} />
                  ))}
@@ -231,11 +254,14 @@ function Dashboard() {
                 <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                 Contact
               </h3>
-              <form className="space-y-3">
-                <input type="text" placeholder="Your Name" className="w-full bg-[#111827] border border-gray-800 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors" />
-                <input type="email" placeholder="Your Email" className="w-full bg-[#111827] border border-gray-800 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors" />
-                <textarea placeholder="Your Message" rows={2} className="w-full bg-[#111827] border border-gray-800 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
-                <button type="button" className="w-full bg-blue-600 hover:bg-blue-500 text-white rounded-lg py-2 text-xs font-medium transition-colors">Send Message</button>
+              <form className="space-y-3" onSubmit={handleSendMessage}>
+                <input type="text" required placeholder="Your Name" className="w-full bg-[#111827] border border-gray-800 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors" />
+                <input type="email" required placeholder="Your Email" className="w-full bg-[#111827] border border-gray-800 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors" />
+                <textarea required placeholder="Your Message" rows={2} className="w-full bg-[#111827] border border-gray-800 rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
+                <button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-600/50 text-white rounded-lg py-2 text-xs font-medium transition-colors">
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </button>
+                {/* Removed inline confirm text since modal is used */}
               </form>
             </section>
 
@@ -246,6 +272,12 @@ function Dashboard() {
           </footer>
         </main>
       </div>
+
+      <ConfirmContentMessage 
+        isVisible={showConfirm} 
+        onClose={() => setShowConfirm(false)} 
+        message="Your message has been sent successfully. I will get back to you soon!"
+      />
     </div>
   )
 }
