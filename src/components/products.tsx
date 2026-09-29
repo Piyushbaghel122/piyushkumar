@@ -1,8 +1,8 @@
-import { createFileRoute , Link } from "@tanstack/react-router";
 
-const productRoute = createFileRoute("/saas")({
-    component: ProductAdmin
-});
+
+// const productRoute = createFileRoute("/saas")({
+//     component: ProductAdmin
+// });
 
 
 export default function ProductAdmin(){

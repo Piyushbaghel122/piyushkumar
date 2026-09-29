@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+
 import { Link } from '@tanstack/react-router';
 
 export default function ThreeAgreement() {
