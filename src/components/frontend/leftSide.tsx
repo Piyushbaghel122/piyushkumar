@@ -22,7 +22,7 @@ export default function LeftSide() {
   ];
 
   return (
-    <aside className="w-65 bg-[#020617] text-gray-300 flex flex-col items-center py-8 px-6 border-r border-blue-900/40 h-screen overflow-y-auto font-sans">
+    <aside className="hidden md:flex w-65 bg-[#020617] text-gray-300 flex-col items-center py-8 px-6 border-r border-blue-900/40 h-screen overflow-y-auto font-sans">
       
       {/* Header Logo */}
       <div className="flex items-center gap-3 mb-8 w-full justify-center">

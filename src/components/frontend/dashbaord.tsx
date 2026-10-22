@@ -37,19 +37,19 @@ function Dashboard() {
       <div className="flex-1 flex flex-col h-screen overflow-y-auto overflow-x-hidden">
         <NavBar />
         
-        <main className="flex-1 px-8 py-10 max-w-7xl mx-auto w-full">
+        <main className="flex-1 px-5 md:px-8 py-8 md:py-10 max-w-7xl mx-auto w-full">
           {/* Hero Section */}
-          <section className="flex flex-col lg:flex-row items-center justify-between mb-16 gap-10">
-            <div className="flex-1">
-              <h2 className="text-gray-300 text-xl mb-2 font-medium tracking-wide">Hello, I'm</h2>
-              <h1 className="text-6xl font-bold mb-6 text-white tracking-tight">
+          <section className="flex flex-col lg:flex-row items-center lg:items-start justify-between mb-12 md:mb-16 gap-10">
+            <div className="flex-1 text-left w-full">
+              <h2 className="text-gray-300 text-lg md:text-xl mb-2 font-medium tracking-wide">Hello, I'm</h2>
+              <h1 className="text-5xl md:text-6xl font-bold mb-4 md:mb-6 text-white tracking-tight">
                 Piyush <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">Kumar</span>
               </h1>
-              <p className="text-gray-400 text-lg mb-8 max-w-xl leading-relaxed">
+              <p className="text-gray-400 text-base md:text-lg mb-8 max-w-xl leading-relaxed">
                 I build backend systems, APIs and automation solutions that make real-world problems easier to solve.
               </p>
               
-              <div className="flex items-center gap-4 mb-10">
+              <div className="flex flex-wrap items-center gap-4 mb-10">
                 <Link to="/project" className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-medium transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] flex items-center gap-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                   View Projects
@@ -60,11 +60,11 @@ function Dashboard() {
               </div>
 
               {/* Tech Icons Row */}
-              <div className="flex items-center gap-6 bg-[#0a0f1c] border border-blue-900/30 p-4 rounded-3xl w-fit">
+              <div className="flex flex-wrap items-center gap-3 md:gap-6 bg-[#0a0f1c] border border-blue-900/30 p-4 rounded-3xl w-full lg:w-fit">
                 {/* Icons placeholders for Python, FastAPI, C++, React, Node, Docker, Postgres, AWS, Linux */}
                 {['Python', 'FastAPI', 'C++', 'React', 'Node.js', 'Docker', 'PostgreSQL', 'AWS', 'Linux'].map((tech) => (
-                  <div key={tech} className="w-14 h-14 rounded-full bg-[#111827] flex items-center justify-center border border-gray-800 hover:border-blue-500/50 transition-colors tooltip relative group cursor-help shadow-sm">
-                    <span className="text-xs font-semibold text-blue-400 tracking-wider">{tech.substring(0,2)}</span>
+                  <div key={tech} className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#111827] flex items-center justify-center border border-gray-800 hover:border-blue-500/50 transition-colors tooltip relative group cursor-help shadow-sm">
+                    <span className="text-[10px] md:text-xs font-semibold text-blue-400 tracking-wider">{tech.substring(0,2)}</span>
                     <div className="absolute -bottom-8 bg-gray-900 text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-gray-700 pointer-events-none z-10 shadow-lg">{tech}</div>
                   </div>
                 ))}
